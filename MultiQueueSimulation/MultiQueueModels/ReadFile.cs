@@ -7,43 +7,32 @@ using System.IO;
 
 namespace MultiQueueModels
 {
-    class ReadFile
+    public class ReadFile
     {
 
-        struct InterarrivalDistribution
-        {
-            public List<TimeDistribution> interdist;
-        }
-
-
-        struct ServiceDistribution
+        
+        public List<TimeDistribution> InterarrivalDistribution;
+        
+        public struct ServiceDistribution
         {
             public int servernum;
             public List<TimeDistribution> servicedist;
         }
-
-        struct inputs
+        public struct Inputs
         {
-            public int numberofservers;
-            public int stoppingcriterea;
-            public int stoppingnumber;
-            public int selectionmethod;
-            public InterarrivalDistribution inter;
+            public int NumberOfServers;
+            public int StoppingCriterea;
+            public int StoppingNumber;
+            public int SelectionMethod;
             public List<ServiceDistribution> service;
-
-
-
-
         }
-        
-
-        public void read(string path)
+        public Inputs Input;
+        public void Read(string path)
         {
             //for testing put the  path of testcase1.txt and debug to see the variables
-            inputs inp;
             FileStream fs = new FileStream(path, FileMode.Open, FileAccess.Read);
             StreamReader reader = new StreamReader(fs);
-            int initialnumberofservers = 0;
+            int initialNumberOfServers = 0;
             string var;
             while (!reader.EndOfStream)
             {
@@ -53,16 +42,16 @@ namespace MultiQueueModels
 
                     case "NumberOfServers":
                         {
-                            inp.numberofservers = int.Parse(reader.ReadLine());
-                            initialnumberofservers = inp.numberofservers;
+                            Input.NumberOfServers = int.Parse(reader.ReadLine());
+                            initialNumberOfServers = Input.NumberOfServers;
                         }
                         break;
 
-                    case "StoppingNumber": { inp.stoppingnumber = int.Parse(reader.ReadLine()); } break;
+                    case "StoppingNumber": { Input.StoppingNumber = int.Parse(reader.ReadLine()); } break;
 
-                    case "StoppingCriteria": { inp.stoppingcriterea = int.Parse(reader.ReadLine()); } break;
+                    case "StoppingCriteria": { Input.StoppingCriterea = int.Parse(reader.ReadLine()); } break;
 
-                    case "SelectionMethod": { inp.stoppingcriterea = int.Parse(reader.ReadLine()); } break;
+                    case "SelectionMethod": { Input.StoppingCriterea = int.Parse(reader.ReadLine()); } break;
 
                     case "InterarrivalDistribution":
                         {
@@ -77,7 +66,7 @@ namespace MultiQueueModels
                                 tlist.Add(t);
 
                             }
-                            inp.inter.interdist = tlist;
+                            InterarrivalDistribution = tlist;
 
                         }
                         break;
@@ -89,7 +78,7 @@ namespace MultiQueueModels
                             ServiceDistribution dist;
                             List<ServiceDistribution> service = new List<ServiceDistribution>();
 
-                            for (int i = 0; i < initialnumberofservers; i++)
+                            for (int i = 0; i < initialNumberOfServers; i++)
                             {
 
                                 for (int j = 0; j < 4; j++)
@@ -107,19 +96,10 @@ namespace MultiQueueModels
                                 reader.ReadLine();
 
                             }
-                            inp.service = service;
-
-
-
-
-
+                            Input.service = service;
                         }
                         break;
-
-
                 }
-
-
             }
         }
     }

@@ -42,6 +42,7 @@
   <ItemGroup>
     <Compile Include="Enums.cs" />
     <Compile Include="PerformanceMeasures.cs" />
+    <Compile Include="ReadFile.cs" />
     <Compile Include="Server.cs" />
     <Compile Include="SimulationCase.cs" />
     <Compile Include="SimulationSystem.cs" />
