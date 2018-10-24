@@ -29,3 +29,9 @@ C:\Users\soa\Downloads\tmp\MultiQueueSimulation-Students\MultiQueueSimulation\Mu
 C:\Users\soa\Downloads\tmp\MultiQueueSimulation-Students\MultiQueueSimulation\MultiQueueModels\obj\Debug\MultiQueueModels.csproj.CoreCompileInputs.cache
 C:\Users\soa\Downloads\tmp\MultiQueueSimulation-Students\MultiQueueSimulation\MultiQueueModels\obj\Debug\MultiQueueModels.dll
 C:\Users\soa\Downloads\tmp\MultiQueueSimulation-Students\MultiQueueSimulation\MultiQueueModels\obj\Debug\MultiQueueModels.pdb
+E:\FCIS 4th Year\1st Sem\Simulation\Template\MultiQueueSimulation\MultiQueueModels\bin\Debug\MultiQueueModels.dll
+E:\FCIS 4th Year\1st Sem\Simulation\Template\MultiQueueSimulation\MultiQueueModels\bin\Debug\MultiQueueModels.pdb
+E:\FCIS 4th Year\1st Sem\Simulation\Template\MultiQueueSimulation\MultiQueueModels\obj\Debug\MultiQueueModels.csprojResolveAssemblyReference.cache
+E:\FCIS 4th Year\1st Sem\Simulation\Template\MultiQueueSimulation\MultiQueueModels\obj\Debug\MultiQueueModels.csproj.CoreCompileInputs.cache
+E:\FCIS 4th Year\1st Sem\Simulation\Template\MultiQueueSimulation\MultiQueueModels\obj\Debug\MultiQueueModels.dll
+E:\FCIS 4th Year\1st Sem\Simulation\Template\MultiQueueSimulation\MultiQueueModels\obj\Debug\MultiQueueModels.pdb
