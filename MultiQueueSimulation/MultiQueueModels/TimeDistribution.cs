@@ -13,6 +13,16 @@ namespace MultiQueueModels
         public decimal CummProbability { get; set; }
         public int MinRange { get; set; }
         public int MaxRange { get; set; }
-
+        
+        public decimal SetCummProp(decimal Last)
+        {
+            CummProbability = this.Probability + Last;
+            return CummProbability;
+        }
+        public void SetRanges(int Minimum,int Maximum)
+        {
+            MinRange = Minimum;
+            MaxRange = Maximum;
+        }
     }
 }
