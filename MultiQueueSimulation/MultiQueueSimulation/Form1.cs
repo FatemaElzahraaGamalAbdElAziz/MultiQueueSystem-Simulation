@@ -43,8 +43,11 @@ namespace MultiQueueSimulation
             if (System.StoppingCriteria == (MultiQueueModels.Enums.StoppingCriteria.NumberOfCustomers))
             {
                 int CurrentCustomer=1;
+                int BusyServers = 0;
+                int CurrentServiceTime = 0;
                 SimulationCase OldCase = new SimulationCase();
                 Random random = new Random();
+                Random ServiceRandom = new Random();
                 OldCase.ArrivalTime = 0;
                 OldCase.InterArrival = 0;
                 while (CurrentCustomer <= System.StoppingNumber)
@@ -52,14 +55,28 @@ namespace MultiQueueSimulation
                     //Our Main code!
                     SimulationCase NewCase = new SimulationCase();
                     NewCase.CustomerNumber = CurrentCustomer;
-                    NewCase.RandomInterArrival = random.Next(1, System.StoppingNumber);
+                    NewCase.RandomInterArrival = random.Next(1, 100);
                     NewCase.InterArrival = System.GetWithinRange(System.InterarrivalDistribution,NewCase.RandomInterArrival);
                     NewCase.ArrivalTime = OldCase.ArrivalTime + NewCase.InterArrival;
-                    //To be continued 
-                    //Server Table and Selection
+                    //Server
+                    NewCase.RandomService = ServiceRandom.Next(1, 100);
+                    if (BusyServers < System.NumberOfServers)
+                    {
+                        NewCase.TimeInQueue = 0;
+                        //SelectionMethod
+                        //for the selected Server
+                        NewCase.StartTime = CurrentServiceTime;
+                        //NewCase.ServiceTime = System.GetWithinRange(**SelectedServer**,NewCase.RandomService);
+                        NewCase.EndTime = NewCase.ServiceTime + NewCase.ServiceTime;
+                    }
+                    else
+                    {
+
+                    }
                     //Time in queue
-                    
+
                     System.SimulationTable.Add(NewCase);
+                    CurrentServiceTime = NewCase.EndTime + 1;
                     OldCase = NewCase;
                     CurrentCustomer++;
                 }
