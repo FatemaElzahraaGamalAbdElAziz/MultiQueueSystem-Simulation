@@ -19,10 +19,11 @@ namespace MultiQueueModels
             CummProbability = this.Probability + Last;
             return CummProbability;
         }
-        public void SetRanges(int Minimum,int Maximum)
+        public void SetRanges(int Minimum)
         {
             MinRange = Minimum;
-            MaxRange = Maximum;
+            MaxRange = (int)CummProbability*100;
         }
+        
     }
 }
