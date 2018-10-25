@@ -27,5 +27,24 @@ namespace MultiQueueModels
         ///////////// OUTPUTS /////////////
         public List<SimulationCase> SimulationTable { get; set; }
         public PerformanceMeasures PerformanceMeasures { get; set; }
+        public void GenerateDistribution(List<TimeDistribution> TimeDistributionTable)
+        {
+            TimeDistribution Last = new TimeDistribution();
+            Last.Probability = 0;
+            Last.MaxRange = 0;
+            for (int i = 0; i < TimeDistributionTable.Count; i++)
+            {
+                TimeDistributionTable[i].SetCummProp(Last.Probability);
+                TimeDistributionTable[i].SetRanges(Last.MaxRange + 1);
+                Last = TimeDistributionTable[i];
+            }
+        }
+        public void ServerDataGenerator(List<Server> Servers)
+        {
+            for (int i = 0; i < Servers.Count; i++)
+            {
+                GenerateDistribution(Servers[i].TimeDistribution);
+            }
+        }
     }
 }
