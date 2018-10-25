@@ -65,8 +65,9 @@ namespace MultiQueueSimulation
                         NewCase.TimeInQueue = 0;
                         //SelectionMethod
                         //for the selected Server
-                        NewCase.StartTime = CurrentServiceTime;
-                        //NewCase.ServiceTime = System.GetWithinRange(**SelectedServer**,NewCase.RandomService);
+                        //NewCase.StartTime = CurrentServiceTime;       **Not Right**
+                        //NewCase.AssignedServer=
+                        NewCase.ServiceTime = System.GetWithinRange(NewCase.AssignedServer.TimeDistribution,NewCase.RandomService);
                         NewCase.EndTime = NewCase.ServiceTime + NewCase.ServiceTime;
                     }
                     else
