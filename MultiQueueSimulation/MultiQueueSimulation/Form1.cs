@@ -53,9 +53,8 @@ namespace MultiQueueSimulation
                     SimulationCase NewCase = new SimulationCase();
                     NewCase.CustomerNumber = CurrentCustomer;
                     NewCase.RandomInterArrival = random.Next(1, System.StoppingNumber);
-                    //GET VALUE OF NewCase.InterArrival
+                    NewCase.InterArrival = System.GetWithinRange(System.InterarrivalDistribution,NewCase.RandomInterArrival);
                     NewCase.ArrivalTime = OldCase.ArrivalTime + NewCase.InterArrival;
-
                     //To be continued 
                     //Server Table and Selection
                     //Time in queue

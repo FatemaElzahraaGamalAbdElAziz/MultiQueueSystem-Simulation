@@ -46,5 +46,18 @@ namespace MultiQueueModels
                 GenerateDistribution(Servers[i].TimeDistribution);
             }
         }
+        public int GetWithinRange(List<TimeDistribution> Table,int Random)
+        {
+            int result = 0;
+            for(int i = 0; i < Table.Count; i++)
+            {
+                if (Random <= Table[i].MaxRange)
+                {
+                    result = Table[i].Time;
+                    break;
+                }
+            }
+            return result;
+        }
     }
 }
