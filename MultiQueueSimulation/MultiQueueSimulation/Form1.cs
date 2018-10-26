@@ -48,6 +48,7 @@ namespace MultiQueueSimulation
                 SimulationCase OldCase = new SimulationCase();
                 Random random = new Random();
                 Random ServiceRandom = new Random();
+                Random ServerRandom = new Random();
                 OldCase.ArrivalTime = 0;
                 OldCase.InterArrival = 0;
                 while (CurrentCustomer <= System.StoppingNumber)
@@ -60,22 +61,44 @@ namespace MultiQueueSimulation
                     NewCase.ArrivalTime = OldCase.ArrivalTime + NewCase.InterArrival;
                     //Server
                     NewCase.RandomService = ServiceRandom.Next(1, 100);
+                    int ServerIndex = 0;
                     if (BusyServers < System.NumberOfServers)
                     {
                         NewCase.TimeInQueue = 0;
-                        //SelectionMethod
-                        //for the selected Server
-                        //NewCase.StartTime = CurrentServiceTime;       **Not Right**
-                        //NewCase.AssignedServer=
+                        if (System.SelectionMethod == Enums.SelectionMethod.HighestPriority)
+                        {
+                            for(int i = 0; i < System.Servers.Count; i++)
+                            {
+                                if(System.Servers[i].LastFinishTime < NewCase.ArrivalTime)
+                                {
+                                    NewCase.AssignedServer = System.Servers[i];
+                                    ServerIndex = i;
+                                    break;
+                                }
+                            }
+                        }
+                        else if(System.SelectionMethod == Enums.SelectionMethod.Random)
+                        {
+                            int RandomServer = ServerRandom.Next(0, System.NumberOfServers-1);
+                            NewCase.AssignedServer = System.Servers[RandomServer];
+                            ServerIndex = RandomServer;
+                        }
+                        NewCase.StartTime = NewCase.ArrivalTime;
                         NewCase.ServiceTime = System.GetWithinRange(NewCase.AssignedServer.TimeDistribution,NewCase.RandomService);
-                        NewCase.EndTime = NewCase.ServiceTime + NewCase.ServiceTime;
+                        NewCase.EndTime = NewCase.StartTime + NewCase.ServiceTime;
+                        System.Servers[ServerIndex].LastFinishTime = NewCase.EndTime;
                     }
                     else
                     {
-
+                        //Time in queue
+                        ServerIndex = System.GetFirstFinishServer();
+                        NewCase.AssignedServer = System.Servers[ServerIndex];
+                        NewCase.TimeInQueue = NewCase.AssignedServer.LastFinishTime-NewCase.ArrivalTime;
+                        NewCase.StartTime = NewCase.AssignedServer.LastFinishTime;
+                        NewCase.ServiceTime = System.GetWithinRange(NewCase.AssignedServer.TimeDistribution, NewCase.RandomService);
+                        NewCase.EndTime = NewCase.StartTime + NewCase.ServiceTime;
+                        System.Servers[ServerIndex].LastFinishTime = NewCase.EndTime;
                     }
-                    //Time in queue
-
                     System.SimulationTable.Add(NewCase);
                     CurrentServiceTime = NewCase.EndTime + 1;
                     OldCase = NewCase;
