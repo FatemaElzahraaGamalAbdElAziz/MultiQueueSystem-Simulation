@@ -59,5 +59,20 @@ namespace MultiQueueModels
             }
             return result;
         }
+
+        public int GetFirstFinishServer()
+        {
+            int min = int.MaxValue;
+            int result = 0;
+            for(int i = 0; i < Servers.Count; i++)
+            {
+                if (Servers[i].LastFinishTime < min)
+                {
+                    result = i;
+                    min = Servers[i].LastFinishTime;
+                }
+            }
+            return result;
+        }
     }
 }
