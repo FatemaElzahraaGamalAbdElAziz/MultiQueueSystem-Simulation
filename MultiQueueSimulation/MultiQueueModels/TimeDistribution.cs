@@ -22,7 +22,7 @@ namespace MultiQueueModels
         public void SetRanges(int Minimum)
         {
             MinRange = Minimum;
-            MaxRange = (int)CummProbability*100;
+            MaxRange = (int)(CummProbability*100);
         }
         
     }
