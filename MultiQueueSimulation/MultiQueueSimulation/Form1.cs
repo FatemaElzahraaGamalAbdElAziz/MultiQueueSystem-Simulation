@@ -28,7 +28,19 @@ namespace MultiQueueSimulation
         {
             System.ReadInput(Reader);
             System.Simulate();
+            
+        }
 
+        private void button2_Click(object sender, EventArgs e)
+        {
+            new Stable(System).Show();
+            this.Hide();
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            string TestingResults = TestingManager.Test(System, Constants.FileNames.TestCase1);
+            MessageBox.Show(TestingResults);
         }
     }
 
