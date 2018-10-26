@@ -51,10 +51,11 @@ namespace MultiQueueModels
 
                     case "InterarrivalDistribution":
                         {
-                            TimeDistribution t = new TimeDistribution();
+                            
                             List<TimeDistribution> tlist = new List<TimeDistribution>();
                             for (int i = 0; i < 4; i++)
                             {
+                                TimeDistribution t = new TimeDistribution();
                                 string tmp = reader.ReadLine();
                                 string[] arr = tmp.Split(',');
                                 t.Time = int.Parse(arr[0]);
@@ -69,16 +70,18 @@ namespace MultiQueueModels
 
                     case "ServiceDistribution_Server1":
                         {
-                            TimeDistribution t = new TimeDistribution();
-                            List<TimeDistribution> tlist = new List<TimeDistribution>();
+                           
+                           
                             Server S = new Server();
                             List<Server> Servers = new List<Server>();
 
                             for (int i = 0; i < initialNumberOfServers; i++)
                             {
+                                List<TimeDistribution> tlist = new List<TimeDistribution>();
 
                                 for (int j = 0; j < 4; j++)
                                 {
+                                     TimeDistribution t = new TimeDistribution();
                                     string tmp = reader.ReadLine();
                                     string[] arr = tmp.Split(',');
                                     t.Time = int.Parse(arr[0]);
