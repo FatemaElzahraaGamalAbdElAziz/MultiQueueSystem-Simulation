@@ -15,6 +15,7 @@ namespace MultiQueueModels
             this.InterarrivalDistribution = new List<TimeDistribution>();
             this.PerformanceMeasures = new PerformanceMeasures();
             this.SimulationTable = new List<SimulationCase>();
+            this.AvailableList = new List<Server>();
         }
 
         ///////////// INPUTS ///////////// 
@@ -24,6 +25,12 @@ namespace MultiQueueModels
         public List<TimeDistribution> InterarrivalDistribution { get; set; }
         public Enums.StoppingCriteria StoppingCriteria { get; set; }
         public Enums.SelectionMethod SelectionMethod { get; set; }
+        List<Server> AvailableList;
+        public struct Waiting
+        {
+            public int Count;
+            public int WaitingTime;
+        }
 
         ///////////// OUTPUTS /////////////
         public List<SimulationCase> SimulationTable { get; set; }
@@ -88,18 +95,15 @@ namespace MultiQueueModels
         }
         public bool CheckIdle(int ArrivalTime)
         {
+
             bool result = false;
-            int count = 0;
             for(int i = 0; i < Servers.Count; i++)
             {
-                if (ArrivalTime < Servers[i].LastFinishTime)
+                if (ArrivalTime >= Servers[i].LastFinishTime)
                 {
-                    count++;
+                    AvailableList.Add(Servers[i]);
+                    result = true;
                 }
-            }
-            if (count == Servers.Count)
-            {
-                result = true;
             }
             return result;
         }
@@ -108,8 +112,6 @@ namespace MultiQueueModels
             if (StoppingCriteria == (MultiQueueModels.Enums.StoppingCriteria.NumberOfCustomers))
             {
                 int CurrentCustomer = 1;
-                int BusyServers = 0;
-                int CurrentServiceTime = 0;
                 SimulationCase OldCase = new SimulationCase();
                 Random random = new Random();
                 Random ServiceRandom = new Random();
@@ -128,7 +130,6 @@ namespace MultiQueueModels
                     else 
                         NewCase.ArrivalTime = OldCase.ArrivalTime + NewCase.InterArrival;
                     //Server
-                    NewCase.RandomService = ServiceRandom.Next(1, 100);
                     int ServerIndex = 0;
                     if (CheckIdle(NewCase.ArrivalTime)) //Needs to change!!
                     {
@@ -147,12 +148,13 @@ namespace MultiQueueModels
                         }
                         else if (SelectionMethod == Enums.SelectionMethod.Random)
                         {
-                            int RandomServer = ServerRandom.Next(0, NumberOfServers - 1);
-                            NewCase.AssignedServer = Servers[RandomServer];
-                            ServerIndex = RandomServer;
+                            int RandomServer = ServerRandom.Next(0, AvailableList.Count - 1);
+                            NewCase.AssignedServer = AvailableList[RandomServer];
+                            ServerIndex = AvailableList[RandomServer].ID-1;
                         }
-                        NewCase.ServerIndex = ServerIndex;
+                        NewCase.ServerIndex = ServerIndex+1;
                         NewCase.StartTime = NewCase.ArrivalTime;
+                        NewCase.RandomService = ServiceRandom.Next(1, 100);
                         NewCase.ServiceTime = GetWithinRange(NewCase.AssignedServer.TimeDistribution, NewCase.RandomService);
                         NewCase.EndTime = NewCase.StartTime + NewCase.ServiceTime;
                         Servers[ServerIndex].LastFinishTime = NewCase.EndTime;
@@ -169,7 +171,6 @@ namespace MultiQueueModels
                         Servers[ServerIndex].LastFinishTime = NewCase.EndTime;
                     }
                     SimulationTable.Add(NewCase);
-                    CurrentServiceTime = NewCase.EndTime + 1;
                     OldCase = NewCase;
                     CurrentCustomer++;
                 }
@@ -181,6 +182,24 @@ namespace MultiQueueModels
             //Don't forget PerformanceMeasures
             //System.PerformanceMeasures
             MessageBox.Show("End of Simulation");
+        }
+
+        public Waiting WaitingCustomers()
+        {
+            int count = 0;
+            int WaitingTime = 0;
+            for(int i = 0; i < SimulationTable.Count; i++)
+            {
+                if (SimulationTable[i].TimeInQueue != 0)
+                {
+                    count++;
+                    WaitingTime += SimulationTable[i].TimeInQueue;
+                }
+            }
+            Waiting Result;
+            Result.Count = count;
+            Result.WaitingTime = WaitingTime;
+            return Result;
         }
     }
 }

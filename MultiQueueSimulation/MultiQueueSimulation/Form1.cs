@@ -39,7 +39,7 @@ namespace MultiQueueSimulation
 
         private void button3_Click(object sender, EventArgs e)
         {
-            string TestingResults = TestingManager.Test(System, Constants.FileNames.TestCase2);
+            string TestingResults = TestingManager.Test(System, Constants.FileNames.TestCase1);
             MessageBox.Show(TestingResults);
         }
     }

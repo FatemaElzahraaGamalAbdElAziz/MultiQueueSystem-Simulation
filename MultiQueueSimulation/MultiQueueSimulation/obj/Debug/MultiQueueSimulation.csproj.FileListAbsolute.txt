@@ -86,3 +86,4 @@ E:\FCIS 4th Year\1st Sem\Simulation\Template\MultiQueueSimulation\MultiQueueSimu
 E:\FCIS 4th Year\1st Sem\Simulation\Template\MultiQueueSimulation\MultiQueueSimulation\obj\Debug\MultiQueueSimulation.Properties.Resources.resources
 E:\FCIS 4th Year\1st Sem\Simulation\Template\MultiQueueSimulation\MultiQueueSimulation\obj\Debug\MultiQueueSimulation.csproj.GenerateResource.Cache
 E:\FCIS 4th Year\1st Sem\Simulation\Template\MultiQueueSimulation\MultiQueueSimulation\obj\Debug\MultiQueueSimulation.csproj.CoreCompileInputs.cache
+E:\FCIS 4th Year\1st Sem\Simulation\Template\MultiQueueSimulation\MultiQueueSimulation\obj\Debug\MultiQueueSimulation.Stable.resources
