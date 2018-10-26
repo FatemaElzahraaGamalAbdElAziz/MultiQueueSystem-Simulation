@@ -94,6 +94,7 @@ namespace MultiQueueModels
                                 dist.servicedist = tlist;
                                 service.Add(dist);
                                 reader.ReadLine();
+                                reader.ReadLine();
 
                             }
                             Input.service = service;
