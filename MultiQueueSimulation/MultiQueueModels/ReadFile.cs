@@ -47,7 +47,7 @@ namespace MultiQueueModels
 
                     case "StoppingCriteria": { Input.StoppingCriterea = int.Parse(reader.ReadLine()); } break;
 
-                    case "SelectionMethod": { Input.StoppingCriterea = int.Parse(reader.ReadLine()); } break;
+                    case "SelectionMethod": { Input.SelectionMethod = int.Parse(reader.ReadLine()); } break;
 
                     case "InterarrivalDistribution":
                         {
@@ -72,13 +72,15 @@ namespace MultiQueueModels
                         {
                            
                            
-                            Server S = new Server();
+                           
                             List<Server> Servers = new List<Server>();
 
                             for (int i = 0; i < initialNumberOfServers; i++)
+                                
                             {
                                 List<TimeDistribution> tlist = new List<TimeDistribution>();
-
+                                Server S = new Server();
+                      
                                 for (int j = 0; j < 4; j++)
                                 {
                                      TimeDistribution t = new TimeDistribution();
