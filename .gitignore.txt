@@ -1,0 +1,5 @@
+/.vs
+/MultiQueueSimulation/MultiQueueModels/bin/Debug
+/MultiQueueSimulation/MultiQueueModels/obj
+/MultiQueueSimulation/MultiQueueSimulation/bin/Debug
+/MultiQueueSimulation/MultiQueueSimulation/obj
