@@ -13,18 +13,14 @@ namespace MultiQueueModels
         
         public List<TimeDistribution> InterarrivalDistribution;
         
-        public struct ServiceDistribution
-        {
-            public int servernum;
-            public List<TimeDistribution> servicedist;
-        }
+       
         public struct Inputs
         {
             public int NumberOfServers;
             public int StoppingCriterea;
             public int StoppingNumber;
             public int SelectionMethod;
-            public List<ServiceDistribution> service;
+            public List<Server> ServersList;
         }
         public Inputs Input;
         public void Read(string path)
@@ -75,8 +71,8 @@ namespace MultiQueueModels
                         {
                             TimeDistribution t = new TimeDistribution();
                             List<TimeDistribution> tlist = new List<TimeDistribution>();
-                            ServiceDistribution dist;
-                            List<ServiceDistribution> service = new List<ServiceDistribution>();
+                            Server S = new Server();
+                            List<Server> Servers = new List<Server>();
 
                             for (int i = 0; i < initialNumberOfServers; i++)
                             {
@@ -90,14 +86,15 @@ namespace MultiQueueModels
                                     tlist.Add(t);
 
                                 }
-                                dist.servernum = i + 1;
-                                dist.servicedist = tlist;
-                                service.Add(dist);
+                                S.ID = i + 1;
+                                S.TimeDistribution = = tlist;
+                                Servers.Add(S);
+                               
                                 reader.ReadLine();
                                 reader.ReadLine();
 
                             }
-                            Input.service = service;
+                            Input.ServersList = Servers;
                         }
                         break;
                 }
