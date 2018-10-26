@@ -87,7 +87,7 @@ namespace MultiQueueModels
 
                                 }
                                 S.ID = i + 1;
-                                S.TimeDistribution = = tlist;
+                                S.TimeDistribution =  tlist;
                                 Servers.Add(S);
                                
                                 reader.ReadLine();
