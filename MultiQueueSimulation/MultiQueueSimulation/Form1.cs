@@ -34,12 +34,12 @@ namespace MultiQueueSimulation
         private void button2_Click(object sender, EventArgs e)
         {
             new Stable(System).Show();
-            this.Hide();
+
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
-            string TestingResults = TestingManager.Test(System, Constants.FileNames.TestCase1);
+            string TestingResults = TestingManager.Test(System, Constants.FileNames.TestCase2);
             MessageBox.Show(TestingResults);
         }
     }

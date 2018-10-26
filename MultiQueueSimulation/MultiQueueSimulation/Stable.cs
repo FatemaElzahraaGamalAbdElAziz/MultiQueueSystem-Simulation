@@ -29,14 +29,18 @@ namespace MultiQueueSimulation
             dt.Columns.Add("Interval Time");
             dt.Columns.Add("Arrival Time");
             dt.Columns.Add("Random Service");
-            dt.Columns.Add("Service Time ");
+            dt.Columns.Add("Service Duration ");
             dt.Columns.Add("Server Index");
             dt.Columns.Add("Begining of Time Service");
             dt.Columns.Add("End of Time Service ");
             dt.Columns.Add("Time in Queue");
             for (int i = 0; i < System.StoppingNumber; i++)
             {
-                dt.Rows.Add(System.SimulationTable[i].CustomerNumber, System.SimulationTable[i].RandomInterArrival, System.SimulationTable[i].InterArrival, System.SimulationTable[i].ArrivalTime, System.SimulationTable[i].RandomService,System.SimulationTable[i].ServiceTime, System.SimulationTable[i].ServerIndex, System.SimulationTable[i].StartTime, System.SimulationTable[i].EndTime, System.SimulationTable[i].TimeInQueue);
+                dt.Rows.Add(System.SimulationTable[i].CustomerNumber, System.SimulationTable[i].RandomInterArrival,
+                    System.SimulationTable[i].InterArrival, System.SimulationTable[i].ArrivalTime,
+                    System.SimulationTable[i].RandomService,System.SimulationTable[i].ServiceTime, 
+                    System.SimulationTable[i].ServerIndex, System.SimulationTable[i].StartTime,
+                    System.SimulationTable[i].EndTime, System.SimulationTable[i].TimeInQueue);
                
             }
             dataGridView1.DataSource = dt;
