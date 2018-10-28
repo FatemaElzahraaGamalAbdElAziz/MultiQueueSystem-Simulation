@@ -16,23 +16,38 @@ namespace MultiQueueModels
             this.PerformanceMeasures = new PerformanceMeasures();
             this.SimulationTable = new List<SimulationCase>();
             this.AvailableList = new List<Server>();
+            this.CustomersNumber = 100;
         }
 
         ///////////// INPUTS ///////////// 
         public int NumberOfServers { get; set; }
         public int StoppingNumber { get; set; }
+        public int CustomersNumber { get; set; }
         public List<Server> Servers { get; set; }
         public List<TimeDistribution> InterarrivalDistribution { get; set; }
         public Enums.StoppingCriteria StoppingCriteria { get; set; }
         public Enums.SelectionMethod SelectionMethod { get; set; }
         List<Server> AvailableList;
+        public int TotalSimulationTime;
         public struct Waiting
         {
             public int Count;
             public int WaitingTime;
         }
-
+        public Waiting waitingInfo;
         ///////////// OUTPUTS /////////////
+        public void CalcTotalSimulationTime()
+        {
+            int max = -12315412;
+           
+            for (int i = 0; i < SimulationTable.Count; i++)
+            {
+                int current = SimulationTable[i].EndTime;
+                if (current > max) { max = current; }
+
+            }
+            TotalSimulationTime = max;
+        }
         public List<SimulationCase> SimulationTable { get; set; }
         public PerformanceMeasures PerformanceMeasures { get; set; }
         public void GenerateDistribution(List<TimeDistribution> TimeDistributionTable)
@@ -83,7 +98,7 @@ namespace MultiQueueModels
         }
         public void ReadInput(ReadFile Reader)
         {
-            Reader.Read("E:\\FCIS 4th Year\\1st Sem\\Simulation\\Template\\MultiQueueSimulation\\MultiQueueSimulation\\TestCases\\TestCase1.txt");
+            Reader.Read("E:\\FCIS 4th Year\\1st Sem\\Simulation\\Template\\MultiQueueSimulation\\MultiQueueSimulation\\TestCases\\TestCase2.txt");
             NumberOfServers = Reader.Input.NumberOfServers;
             StoppingNumber = Reader.Input.StoppingNumber;
             StoppingCriteria = (MultiQueueModels.Enums.StoppingCriteria)Reader.Input.StoppingCriterea;
@@ -97,7 +112,8 @@ namespace MultiQueueModels
         {
 
             bool result = false;
-            for(int i = 0; i < Servers.Count; i++)
+            AvailableList = new List<Server>();
+            for (int i = 0; i < Servers.Count; i++)
             {
                 if (ArrivalTime >= Servers[i].LastFinishTime)
                 {
@@ -109,8 +125,7 @@ namespace MultiQueueModels
         }
         public void Simulate()
         {
-            if (StoppingCriteria == (MultiQueueModels.Enums.StoppingCriteria.NumberOfCustomers))
-            {
+           
                 int CurrentCustomer = 1;
                 SimulationCase OldCase = new SimulationCase();
                 Random random = new Random();
@@ -118,12 +133,22 @@ namespace MultiQueueModels
                 Random ServerRandom = new Random();
                 OldCase.ArrivalTime = 0;
                 OldCase.InterArrival = 0;
+                OldCase.EndTime = 0;
+                bool cond = true;
                 while (CurrentCustomer <= StoppingNumber)
                 {
                     //Our Main code!
+                    if(StoppingCriteria == (MultiQueueModels.Enums.StoppingCriteria.NumberOfCustomers))
+                    {
+                        cond = (CurrentCustomer <= StoppingNumber);
+                    }
+                    else
+                    {
+                        cond = (OldCase.EndTime <= StoppingNumber);
+                    }
                     SimulationCase NewCase = new SimulationCase();
                     NewCase.CustomerNumber = CurrentCustomer;
-                    NewCase.RandomInterArrival = random.Next(1, 100);
+                    NewCase.RandomInterArrival = random.Next(1, 101);
                     NewCase.InterArrival = GetWithinRange(InterarrivalDistribution, NewCase.RandomInterArrival);
                     if (CurrentCustomer == 1)
                         NewCase.ArrivalTime = OldCase.ArrivalTime;
@@ -131,7 +156,7 @@ namespace MultiQueueModels
                         NewCase.ArrivalTime = OldCase.ArrivalTime + NewCase.InterArrival;
                     //Server
                     int ServerIndex = 0;
-                    if (CheckIdle(NewCase.ArrivalTime)) //Needs to change!!
+                    if (CheckIdle(NewCase.ArrivalTime)) 
                     {
                         NewCase.TimeInQueue = 0;
                         if (SelectionMethod == Enums.SelectionMethod.HighestPriority)
@@ -148,13 +173,25 @@ namespace MultiQueueModels
                         }
                         else if (SelectionMethod == Enums.SelectionMethod.Random)
                         {
-                            int RandomServer = ServerRandom.Next(0, AvailableList.Count - 1);
+                            int RandomServer = ServerRandom.Next(0, AvailableList.Count);
                             NewCase.AssignedServer = AvailableList[RandomServer];
                             ServerIndex = AvailableList[RandomServer].ID-1;
                         }
                         NewCase.ServerIndex = ServerIndex+1;
-                        NewCase.StartTime = NewCase.ArrivalTime;
-                        NewCase.RandomService = ServiceRandom.Next(1, 100);
+                        if(NewCase.AssignedServer.LastFinishTime > NewCase.ArrivalTime)
+                        {
+                            NewCase.StartTime = NewCase.AssignedServer.LastFinishTime;
+                        }
+                        else
+                        {
+                            NewCase.StartTime = NewCase.ArrivalTime;
+
+                        }
+                        NewCase.RandomService = ServiceRandom.Next(1, 101);
+                        if (NewCase.RandomService == 0)
+                        {
+                            NewCase.RandomService = 1;
+                        }
                         NewCase.ServiceTime = GetWithinRange(NewCase.AssignedServer.TimeDistribution, NewCase.RandomService);
                         NewCase.EndTime = NewCase.StartTime + NewCase.ServiceTime;
                         Servers[ServerIndex].LastFinishTime = NewCase.EndTime;
@@ -164,22 +201,22 @@ namespace MultiQueueModels
                         //Time in queue
                         ServerIndex = GetFirstFinishServer();
                         NewCase.AssignedServer = Servers[ServerIndex];
-                        NewCase.TimeInQueue = NewCase.AssignedServer.LastFinishTime - NewCase.ArrivalTime;
                         NewCase.StartTime = NewCase.AssignedServer.LastFinishTime;
+                        NewCase.TimeInQueue = NewCase.StartTime - NewCase.ArrivalTime;
+                        NewCase.RandomService = ServiceRandom.Next(1, 101);
                         NewCase.ServiceTime = GetWithinRange(NewCase.AssignedServer.TimeDistribution, NewCase.RandomService);
                         NewCase.EndTime = NewCase.StartTime + NewCase.ServiceTime;
+                        NewCase.ServerIndex = ServerIndex +1;
                         Servers[ServerIndex].LastFinishTime = NewCase.EndTime;
                     }
                     SimulationTable.Add(NewCase);
                     OldCase = NewCase;
                     CurrentCustomer++;
                 }
-            }
-            else //Where is the time limit input
-            {
 
-            }
             //Don't forget PerformanceMeasures
+            PerformanceMeasures.CalcServerPerformance(this);
+            PerformanceMeasures.CalcSysPerformance(this);
             //System.PerformanceMeasures
             MessageBox.Show("End of Simulation");
         }

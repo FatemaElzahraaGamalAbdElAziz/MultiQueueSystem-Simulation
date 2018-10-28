@@ -74,8 +74,6 @@ C:\Users\soa\Downloads\tmp\MultiQueueSimulation-Students\MultiQueueSimulation\Mu
 C:\Users\soa\Downloads\tmp\MultiQueueSimulation-Students\MultiQueueSimulation\MultiQueueSimulation\obj\Debug\MultiQueueSimulation.exe
 C:\Users\soa\Downloads\tmp\MultiQueueSimulation-Students\MultiQueueSimulation\MultiQueueSimulation\obj\Debug\MultiQueueSimulation.pdb
 E:\FCIS 4th Year\1st Sem\Simulation\Template\MultiQueueSimulation\MultiQueueSimulation\bin\Debug\MultiQueueSimulation.exe.config
-E:\FCIS 4th Year\1st Sem\Simulation\Template\MultiQueueSimulation\MultiQueueSimulation\obj\Debug\MultiQueueSimulation.exe
-E:\FCIS 4th Year\1st Sem\Simulation\Template\MultiQueueSimulation\MultiQueueSimulation\obj\Debug\MultiQueueSimulation.pdb
 E:\FCIS 4th Year\1st Sem\Simulation\Template\MultiQueueSimulation\MultiQueueSimulation\bin\Debug\MultiQueueSimulation.exe
 E:\FCIS 4th Year\1st Sem\Simulation\Template\MultiQueueSimulation\MultiQueueSimulation\bin\Debug\MultiQueueSimulation.pdb
 E:\FCIS 4th Year\1st Sem\Simulation\Template\MultiQueueSimulation\MultiQueueSimulation\bin\Debug\MultiQueueModels.dll
@@ -84,6 +82,9 @@ E:\FCIS 4th Year\1st Sem\Simulation\Template\MultiQueueSimulation\MultiQueueSimu
 E:\FCIS 4th Year\1st Sem\Simulation\Template\MultiQueueSimulation\MultiQueueSimulation\obj\Debug\MultiQueueSimulation.csprojResolveAssemblyReference.cache
 E:\FCIS 4th Year\1st Sem\Simulation\Template\MultiQueueSimulation\MultiQueueSimulation\obj\Debug\MultiQueueSimulation.Form1.resources
 E:\FCIS 4th Year\1st Sem\Simulation\Template\MultiQueueSimulation\MultiQueueSimulation\obj\Debug\MultiQueueSimulation.Properties.Resources.resources
+E:\FCIS 4th Year\1st Sem\Simulation\Template\MultiQueueSimulation\MultiQueueSimulation\obj\Debug\MultiQueueSimulation.Stable.resources
 E:\FCIS 4th Year\1st Sem\Simulation\Template\MultiQueueSimulation\MultiQueueSimulation\obj\Debug\MultiQueueSimulation.csproj.GenerateResource.Cache
 E:\FCIS 4th Year\1st Sem\Simulation\Template\MultiQueueSimulation\MultiQueueSimulation\obj\Debug\MultiQueueSimulation.csproj.CoreCompileInputs.cache
-E:\FCIS 4th Year\1st Sem\Simulation\Template\MultiQueueSimulation\MultiQueueSimulation\obj\Debug\MultiQueueSimulation.Stable.resources
+E:\FCIS 4th Year\1st Sem\Simulation\Template\MultiQueueSimulation\MultiQueueSimulation\obj\Debug\MultiQueueSimulation.exe
+E:\FCIS 4th Year\1st Sem\Simulation\Template\MultiQueueSimulation\MultiQueueSimulation\obj\Debug\MultiQueueSimulation.pdb
+E:\FCIS 4th Year\1st Sem\Simulation\Template\MultiQueueSimulation\MultiQueueSimulation\obj\Debug\MultiQueueSimulation.Graph.resources

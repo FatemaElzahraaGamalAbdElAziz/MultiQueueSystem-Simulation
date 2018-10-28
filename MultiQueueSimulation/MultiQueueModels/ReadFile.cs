@@ -53,11 +53,12 @@ namespace MultiQueueModels
                         {
                             
                             List<TimeDistribution> tlist = new List<TimeDistribution>();
-                            for (int i = 0; i < 4; i++)
+                            while(true)
                             {
                                 TimeDistribution t = new TimeDistribution();
                                 string tmp = reader.ReadLine();
                                 string[] arr = tmp.Split(',');
+                                if (arr.Length == 1) { break; }
                                 t.Time = int.Parse(arr[0]);
                                 t.Probability = decimal.Parse(arr[1]);
                                 tlist.Add(t);
@@ -81,11 +82,12 @@ namespace MultiQueueModels
                                 List<TimeDistribution> tlist = new List<TimeDistribution>();
                                 Server S = new Server();
                       
-                                for (int j = 0; j < 4; j++)
-                                {
+                                while(!reader.EndOfStream) {
                                      TimeDistribution t = new TimeDistribution();
                                     string tmp = reader.ReadLine();
                                     string[] arr = tmp.Split(',');
+                                    if (arr.Length == 1) { break; }
+
                                     t.Time = int.Parse(arr[0]);
                                     t.Probability = decimal.Parse(arr[1]);
                                     tlist.Add(t);
@@ -96,10 +98,10 @@ namespace MultiQueueModels
                                 Servers.Add(S);
                                
                                 reader.ReadLine();
-                                reader.ReadLine();
 
                             }
                             Input.ServersList = Servers;
+                           
                         }
                         break;
                 }
